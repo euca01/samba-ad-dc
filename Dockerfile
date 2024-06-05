@@ -27,9 +27,8 @@ RUN apk --no-cache add \
     tdb \
     tdb-dev \
     py3-tdb \
-    acl
-
-RUN pip3 install dnspython
+    acl \
+    py3-dnspython
 
 ADD kdb5_util_create.expect kdb5_util_create.expect
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
