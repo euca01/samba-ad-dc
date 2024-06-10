@@ -5,6 +5,7 @@ RUN apk --no-cache add \
     bash \
     samba-dc \
     krb5-server \
+    krb5 \
     supervisor \
     bind \
     bind-tools \
