@@ -6,7 +6,6 @@ RUN apk --no-cache add \
     samba-dc \
     heimdal \
     supervisor \
-    bind \
     bind-tools \
     pwgen \
     acl-dev \
