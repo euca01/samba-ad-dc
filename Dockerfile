@@ -30,10 +30,7 @@ RUN apk --no-cache add \
     acl \
     py3-dnspython
 
-ADD kdb5_util_create.expect kdb5_util_create.expect
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-ADD named.conf /etc/bind/named.conf
-ADD named.conf.options /etc/bind/named.conf.options
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh

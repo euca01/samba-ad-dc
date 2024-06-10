@@ -5,8 +5,8 @@ services:
     environment:
       - SAMBA_DOMAIN=ESITC
       - SAMBA_REALM=ESITC.PARIS
-      - SAMBA_ADMIN_PASSWORD=sitec2024$
-      - KERBEROS_PASSWORD=sitec2024$
+      - SAMBA_ADMIN_PASSWORD=YOURPASSWORD
+      - KERBEROS_PASSWORD=YOURPASSWORD
       - SAMBA_HOST_IP=192.168.181.10
     volumes:
       - /opt/smb-conf:/etc/samba
