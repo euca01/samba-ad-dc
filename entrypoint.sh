@@ -37,12 +37,13 @@ appSetup () {
          ldap server require strong auth = no' /etc/samba/smb.conf
 	fi
     # Create Kerberos database
-    expect kdb5_util_create.expect
+    kstash --random-key
+    #expect kdb5_util_create.expect
 
     # Export kerberos keytab for use with sssd
-    if [ "${OMIT_EXPORT_KEY_TAB}" != "true" ]; then
-        samba-tool domain exportkeytab /etc/krb5.keytab --principal ${HOSTNAME}\$
-    fi
+    #if [ "${OMIT_EXPORT_KEY_TAB}" != "true" ]; then
+    #    samba-tool domain exportkeytab /etc/krb5.keytab --principal ${HOSTNAME}\$
+    #fi
 
     touch "${SETUP_LOCK_FILE}"
 }

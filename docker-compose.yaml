@@ -14,5 +14,5 @@ services:
         source: /opt/krb-conf/krb5.conf
         target: /etc/krb5.conf
       - /opt/smb-data:/var/lib/samba
-      - /opt/krb-data:/var/lib/krb5kdc
+      - /opt/krb-data:/var/heimdal
     network_mode: "host"
