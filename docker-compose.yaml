@@ -1,24 +1,18 @@
-version: '2'
 services:
   samba:
+    container_name: samba-ad-dc
     image: tkaefer/alpine-samba-ad-container
     environment:
       - SAMBA_DOMAIN=ESITC
       - SAMBA_REALM=ESITC.PARIS
+      - SAMBA_ADMIN_PASSWORD=sitec2024$
+      - KERBEROS_PASSWORD=sitec2024$
+      - SAMBA_HOST_IP=192.168.181.10
     volumes:
       - /opt/smb-conf:/etc/samba
-      - /opt/krb-conf/krb5.conf:/etc/krb5.conf
+      - type: bind
+        source: /opt/krb-conf/krb5.conf
+        target: /etc/krb5.conf
       - /opt/smb-data:/var/lib/samba
       - /opt/krb-data:/var/lib/krb5kdc
-    ports:
-      - "22:22"
-      - "53:53"
-      - "389:389"
-      - "88:88"
-      - "135:135"
-      - "139:139"
-      - "138:138"
-      - "445:445"
-      - "464:464"
-      - "3268:3268"
-      - "3269:3269"
+    network_mode: "host"

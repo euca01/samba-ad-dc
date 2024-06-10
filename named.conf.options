@@ -2,7 +2,7 @@ options {
   directory "/var/lib/samba/bind-dns/";
 
   forwarders {
-          1.1.1.1;
+          192.168.181.1;
   };
 
   allow-query {  any;};
