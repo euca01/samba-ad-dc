@@ -28,7 +28,7 @@ appSetup () {
       --domain=$SAMBA_DOMAIN \
       --realm=$SAMBA_REALM \
       --server-role=dc\
-      --dns-backend=BIND9_DLZ \
+      --dns-backend=SAMBA_INTERNAL \
       --adminpass=$SAMBA_ADMIN_PASSWORD \
       $SAMBA_HOST_IP
     cat /var/lib/samba/private/krb5.conf > /etc/krb5.conf

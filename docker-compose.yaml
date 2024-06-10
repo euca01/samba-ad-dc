@@ -1,7 +1,7 @@
 services:
   samba:
     container_name: samba-ad-dc
-    image: tkaefer/alpine-samba-ad-container
+    image: euca01/samba-ad-dc:main
     environment:
       - SAMBA_DOMAIN=ESITC
       - SAMBA_REALM=ESITC.PARIS
