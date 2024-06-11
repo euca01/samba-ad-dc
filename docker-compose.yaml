@@ -5,8 +5,8 @@ services:
     environment:
       - SAMBA_DOMAIN=ESITC
       - SAMBA_REALM=ESITC.PARIS
-      - SAMBA_ADMIN_PASSWORD=YOURPASSWORD
-      - KERBEROS_PASSWORD=YOURPASSWORD
+      - SAMBA_ADMIN_PASSWORD=ChangePassword$5
+      - KERBEROS_PASSWORD=ChangePassword$5
       - SAMBA_HOST_IP=192.168.181.10
     restart: unless-stopped
     volumes:
@@ -33,3 +33,8 @@ services:
       - "636:636/tcp"
       - "3268:3268/tcp"
       - "3269:3269/tcp"
+
+
+
+
+docker run -e SAMBA_DOMAIN='ESITC' -e SAMBA_REALM='ESITC.PARIS' -e SAMBA_ADMIN_PASSWORD='YOURpassword$5' -e KERBEROS_PASSWORD='YOURpassword$5' -e SAMBA_HOST_IP='192.168.181.10' testsamba:latest

@@ -14,8 +14,8 @@ fi
 appSetup () {
     echo "Initializing samba database..."
 
-    SAMBA_ADMIN_PASSWORD=${SAMBA_ADMIN_PASSWORD:-$(pwgen -cny 10 1)}
-    export KERBEROS_PASSWORD=${KERBEROS_PASSWORD:-$(pwgen -cny 10 1)}
+    SAMBA_ADMIN_PASSWORD=${SAMBA_ADMIN_PASSWORD:-ChangePassword$5}
+    export KERBEROS_PASSWORD=${KERBEROS_PASSWORD:-ChangePassword$5}
     echo Samba administrator password: $SAMBA_ADMIN_PASSWORD
     echo Kerberos KDC database master key: $KERBEROS_PASSWORD
 
@@ -41,7 +41,7 @@ appSetup () {
 
 
     # Create Kerberos database
-    kstash --random-key
+    #kstash --random-key
     
     touch "${SETUP_LOCK_FILE}"
 }
