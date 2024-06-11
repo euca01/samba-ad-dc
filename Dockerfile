@@ -5,36 +5,13 @@ RUN apk --no-cache add \
     bash \
     samba-dc \
     heimdal \
-    supervisor \
-    bind-tools \
-    pwgen \
-    acl-dev \
-    attr-dev \
-    blkid \
-    gnutls-dev \
-    readline-dev \
-    python3-dev \
-    linux-pam-dev \
-    py3-pip \
-    popt-dev \
-    openldap-dev \
-    libbsd-dev \
-    cups-dev \
-    ca-certificates \
-    py3-certifi \
-    rsyslog \
-    expect \
-    tdb \
-    tdb-dev \
-    py3-tdb \
-    acl \
-    py3-dnspython
-
+    supervisor
+    
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
 
-EXPOSE 22 53 389 88 135 139 138 445 464 3268 3269
+EXPOSE 53/tcp 53/udp 88/tcp 88/udp 135/tcp 137/udp 138/udp 139/tcp 389/tcp 389/udp 445/tcp 464/tcp 464/udp 636/tcp 3268/tcp 3269/tcp
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["app:start"]

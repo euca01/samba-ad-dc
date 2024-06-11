@@ -36,6 +36,10 @@ appSetup () {
 	     sed -i '/\[global\]/a # enable unencrypted passwords \
          ldap server require strong auth = no' /etc/samba/smb.conf
 	fi
+
+	#grep -qxF 'include "/configs/projectname.conf"' foo.bar || echo 'include "/configs/projectname.conf"' >> foo.bar
+
+
     # Create Kerberos database
     kstash --random-key
     
