@@ -12,7 +12,7 @@ This repository provides a Docker Compose configuration to deploy a Samba Active
 
 1. Execute the autoconfig script
     ```sh
-    curl -s https://raw.githubusercontent.com/euca01/samba-ad-dc/main/autoconfig.sh | bash
+    bash <(curl -s https://raw.githubusercontent.com/euca01/samba-ad-dc/main/autoconfig.sh)
     ```
 
 2. Make sure DNS are resolved localy

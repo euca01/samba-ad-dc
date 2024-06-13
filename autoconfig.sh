@@ -9,11 +9,11 @@ read -p "Enter the Samba Domain (ex. Samdom ): " SAMBA_DOMAIN
 read -p "Enter the Samba Realm (ex Samdom.com ): " SAMBA_REALM
 
 # Prompt for Samba Admin password
-read -sp "Enter the Samba Admin password: " SAMBA_ADMIN_PASSWORD
+read -sp "Enter the Samba Admin password (Must be a complex pwd. min 7 car): " SAMBA_ADMIN_PASSWORD
 echo 
 
 # Prompt for Kerberos Password
-read -sp "Enter the Kerberos Password: " KERBEROS_PASSWORD
+read -sp "Enter the Kerberos Password(Must be a complex pwd. min 7 car): " KERBEROS_PASSWORD
 echo 
 
 # Prompt for IP of the host
@@ -73,6 +73,23 @@ SAMBA_HOST_IP=${SAMBA_HOST_IP}
 NTP_SERVERS=${NTP_SERVERS}
 TZ=${TZ}
 EOF
+
+echo "Creating dir /opt/krb-conf"
+mkdir /opt/krb-conf
+echo "Creating empty file /opt/krb-conf/krb5.conf"
+touch /opt/krb-conf/krb5.conf
+
+echo "Creating /opt/krb-data"
+mkdir /opt/krb-data
+
+echo "Creating /opt/smb-conf"
+mkdir /opt/smb-conf
+
+echo "Creating /opt/smb-data"
+mkdir /opt/smb-data
+
+
+
 
 echo "Mouting and starting container"
 
