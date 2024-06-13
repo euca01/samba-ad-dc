@@ -74,19 +74,31 @@ NTP_SERVERS=${NTP_SERVERS}
 TZ=${TZ}
 EOF
 
-echo "Creating dir /opt/krb-conf"
-mkdir /opt/krb-conf
+if [ ! -d /opt/krb-conf ] ; then
+  echo "Creating dir /opt/krb-conf"
+  mkdir /opt/krb-conf
+fi
+
 echo "Creating empty file /opt/krb-conf/krb5.conf"
 touch /opt/krb-conf/krb5.conf
 
-echo "Creating /opt/krb-data"
-mkdir /opt/krb-data
 
-echo "Creating /opt/smb-conf"
-mkdir /opt/smb-conf
+if [ ! -d /opt/krb-data ] ; then
+  echo "Creating /opt/krb-data"
+  mkdir /opt/krb-data
+fi
 
-echo "Creating /opt/smb-data"
-mkdir /opt/smb-data
+
+if [ ! -d /opt/smb-conf ] ; then
+  echo "Creating /opt/smb-conf"
+  mkdir /opt/smb-conf
+fi
+
+if [ ! -d /opt/smb-data ] ; then
+  echo "Creating /opt/smb-data"
+  mkdir /opt/smb-data
+fi
+
 
 
 

@@ -10,33 +10,11 @@ This repository provides a Docker Compose configuration to deploy a Samba Active
 
 ## Getting Started
 
-1. Execute the autoconfig script
+1. Install Docker and Docker Compose with https://docs.docker.com/engine/install/debian/
+
+2. Execute the autoconfig script
     ```sh
     bash <(curl -s https://raw.githubusercontent.com/euca01/samba-ad-dc/main/autoconfig.sh)
-    ```
-
-2. Make sure DNS are resolved localy
-
-3. Download the docker compose file.
-
-4. Customise the env file
-    ```sh
-    mkdir /opt/krb-conf
-    mkdir /opt/krb-data
-    mkdir /opt/smb-conf
-    mkdir /opt/smb-data
-    touch /opt/krb-conf/krb5.conf
-    docker compose up -d
-    ```
-
-5. Execute 
-    ```sh
-    mkdir /opt/krb-conf
-    mkdir /opt/krb-data
-    mkdir /opt/smb-conf
-    mkdir /opt/smb-data
-    touch /opt/krb-conf/krb5.conf
-    docker compose up -d
     ```
 
 ## Configuration
