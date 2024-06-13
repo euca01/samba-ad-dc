@@ -2,12 +2,9 @@ services:
   samba:
     container_name: samba-ad-dc
     image: euca01/samba-ad-dc:main
-    environment:
-      - SAMBA_DOMAIN=ESITC
-      - SAMBA_REALM=ESITC.PARIS
-      - SAMBA_ADMIN_PASSWORD=ChangePassword$5
-      - KERBEROS_PASSWORD=ChangePassword$5
-      - SAMBA_HOST_IP=192.168.181.10
+    env_file:
+      - path: ./samba.env
+        required: true
     restart: unless-stopped
     volumes:
       - /opt/smb-conf:/etc/samba
@@ -34,7 +31,19 @@ services:
       - "3268:3268/tcp"
       - "3269:3269/tcp"
 
-
-
-
-docker run -e SAMBA_DOMAIN='ESITC' -e SAMBA_REALM='ESITC.PARIS' -e SAMBA_ADMIN_PASSWORD='YOURpassword$5' -e KERBEROS_PASSWORD='YOURpassword$5' -e SAMBA_HOST_IP='192.168.181.10' testsamba:latest
+  chrony:
+    image: euca01/chrony:main
+    cap_add:
+      - ALL
+    container_name: ntp
+    restart: unless-stopped
+    ports:
+      - 123:123/udp
+    env_file:
+      - path: ./samba.env
+        required: true
+    environment:
+      - LOG_LEVEL=0
+      - NOCLIENTLOG=true
+      - ENABLE_NTS=false
+      - ENABLE_SYSCLK=true
