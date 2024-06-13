@@ -35,7 +35,7 @@ services:
     image: euca01/chrony:main
     cap_add:
       - ALL
-    container_name: ntp
+    container_name: chrony
     restart: unless-stopped
     ports:
       - 123:123/udp

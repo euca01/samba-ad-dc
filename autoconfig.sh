@@ -21,7 +21,7 @@ read -p "Enter the IP of the AD DC host: " SAMBA_HOST_IP
 
 # Prompt for IP of the host
 read -p "Enter the IP of the DNS host (1.1.1.1 if empty): " DNS_HOST_IP
-if [[ $DNS_HOST_IP ]]; then
+if [ -n "$DNS_HOST_IP" ]; then
     DNS_HOST_IP="1.1.1.1"
 fi
 
