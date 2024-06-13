@@ -5,7 +5,8 @@ RUN apk --no-cache add \
     bash \
     samba-dc \
     heimdal \
-    supervisor
+    supervisor \
+    rsyslog
     
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
