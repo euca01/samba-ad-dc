@@ -37,6 +37,25 @@ appSetup () {
          ldap server require strong auth = no' /etc/samba/smb.conf
 	fi
 
+	sed -i '/\[global\]/a # limit port range \
+rpc server dynamic port range = 50000-55000' /etc/samba/smb.conf
+
+    sed -i '/\[global\]/a # disable null session \
+restrict anonymous = 2' /etc/samba/smb.conf
+
+    sed -i '/\[global\]/a # disable NetBIOS \
+disable netbios = yes \
+smb ports = 445' /etc/samba/smb.conf
+
+    sed -i '/\[global\]/a # disable printer \
+printcap name = /dev/null \
+load printers = no \
+disable spoolss = yes \
+printing = bsd' /etc/samba/smb.conf
+
+	sed -i '/\[global\]/a # disable NTLMv1 \
+ntlm auth = mschapv2-and-ntlmv2-only' /etc/samba/smb.conf
+
     # Create Kerberos database
     #kstash --random-key
     
