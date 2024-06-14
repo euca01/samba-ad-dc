@@ -47,3 +47,17 @@ services:
       - NOCLIENTLOG=true
       - ENABLE_NTS=false
       - ENABLE_SYSCLK=true
+
+  bind9:
+    image: euca01/bind9-alpine
+    container_name: bind9
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /opt/bind9-conf/named.conf
+        target: /etc/bind9/named.conf
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+
+
