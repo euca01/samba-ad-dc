@@ -105,7 +105,7 @@ if [ ! -d /opt/bind9-conf ] ; then
 fi
 
 
-curl -fsSL https://raw.githubusercontent.com/euca01/samba-ad-dc/main/docker-compose.yaml -o /opt/bind9-conf/named.conf
+curl -fsSL https://raw.githubusercontent.com/euca01/samba-ad-dc/main/named.conf -o /opt/bind9-conf/named.conf
 
 
 echo "Mouting and starting container"
