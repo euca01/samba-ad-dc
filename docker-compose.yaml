@@ -1,11 +1,13 @@
 services:
   samba:
+    hostname: DEFAULT_DOCKERHOST
     container_name: samba-ad-dc
     image: euca01/samba-ad-dc:main
     env_file:
       - path: ./samba.env
         required: true
     restart: unless-stopped
+    network_mode: "host"
     volumes:
       - /opt/smb-conf:/etc/samba
       - type: bind
@@ -13,35 +15,37 @@ services:
         target: /etc/krb5.conf
       - /opt/smb-data:/var/lib/samba
       - /opt/krb-data:/var/heimdal
-    ports:
-      - "5353:53/udp"
-      - "5353:53/tcp"
-      - "88:88/tcp"
-      - "88:88/udp"
-      - "135:135/tcp"
-      - "137:137/udp"
-      - "138:138/udp"
-      - "139:139/tcp"
-      - "389:389/tcp"
-      - "389:389/udp"
-      - "445:445/tcp"
-      - "464:464/tcp"
-      - "464:464/udp"
-      - "636:636/tcp"
-      - "3268:3268/tcp"
-      - "3269:3269/tcp"
+#    ports:
+#      - "53:53/udp"
+#      - "53:53/tcp"
+#      - "88:88/tcp"
+#      - "88:88/udp"
+#      - "135:135/tcp"
+##      - "137:137/udp"
+ #     - "138:138/udp"
+ #     - "139:139/tcp"
+ #     - "389:389/tcp"
+ #     - "389:389/udp"
+ #     - "445:445/tcp"
+ #     - "464:464/tcp"
+ #     - "464:464/udp"
+ #     - "636:636/tcp"
+ #     - "3268:3268/tcp"
+ #     - "3269:3269/tcp"
 
-  bind9:
-    image: euca01/bind9-alpine:main
-    container_name: bind9
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: /opt/bind9-conf/named.conf
-        target: /etc/bind/named.conf
-    ports:
-      - "53:53/udp"
-      - "53:53/tcp"
+#  bind9:
+#    image: euca01/bind9-alpine:main
+#    container_name: bind9
+#    restart: unless-stopped
+#    volumes:
+#      - type: bind
+#        source: /opt/bind9-conf/named.conf
+#        target: /etc/bind/named.conf
+#    ports:
+#      - "53:53/udp"
+#      - "53:53/tcp"
+#    depends_on:
+#      - samba
 
   chrony:
     image: euca01/chrony:main

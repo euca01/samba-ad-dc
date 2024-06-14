@@ -5,7 +5,7 @@ set -e
 SAMBA_DOMAIN=${SAMBA_DOMAIN:-SAMDOM}
 SAMBA_REALM=${SAMBA_REALM:-SAMDOM.EXAMPLE.COM}
 LDAP_ALLOW_INSECURE=${LDAP_ALLOW_INSECURE:-false}
-SETUP_LOCK_FILE="/var/lib/samba/private/.setup.lock.do.not.remove"
+SETUP_LOCK_FILE="/etc/samba/.setup.lock.do.not.remove"
 
 if [[ $SAMBA_HOST_IP ]]; then
     SAMBA_HOST_IP="--host-ip=${SAMBA_HOST_IP}"

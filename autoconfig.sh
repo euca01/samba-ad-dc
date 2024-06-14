@@ -21,7 +21,7 @@ read -p "Enter the IP of the AD DC host: " SAMBA_HOST_IP
 
 # Prompt for IP of the host
 read -p "Enter the IP of the DNS host (1.1.1.1 if empty): " DNS_HOST_IP
-if [ -n "$DNS_HOST_IP" ]; then
+if [ -z "${DNS_HOST_IP}" ]; then
     DNS_HOST_IP="1.1.1.1"
 fi
 
@@ -37,6 +37,8 @@ read -p "What is your time zone : " TZ
 if [ ! -f "./docker-compose.yaml" ]; then
    echo "Adding docker-compose.yaml file"
    curl -fsSL https://raw.githubusercontent.com/euca01/samba-ad-dc/main/docker-compose.yaml -o ./docker-compose.yaml
+   sed -i "s/DEFAULT_DOCKERHOST/$(cat /etc/hostname)/g" ./docker-compose.yaml
+   
 fi
 
 
