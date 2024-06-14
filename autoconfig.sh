@@ -104,7 +104,7 @@ if [ ! -d /opt/bind9-conf ] ; then
   mkdir /opt/bind9-conf
 fi
 
-
+echo "Generating BIND9 config"
 curl -fsSL https://raw.githubusercontent.com/euca01/samba-ad-dc/main/named.conf -o /opt/bind9-conf/named.conf
 sed -i "s/DOMAIN_TO_REPLACE/${SAMBA_REALM}/g" /opt/bind9-conf/named.conf
 sed -i "s/DNS_IP_TO_REPLACE/${DNS_HOST_IP}/g" /opt/bind9-conf/named.conf
