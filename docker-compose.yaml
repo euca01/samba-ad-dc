@@ -55,7 +55,7 @@ services:
     volumes:
       - type: bind
         source: /opt/bind9-conf/named.conf
-        target: /etc/bind9/named.conf
+        target: /etc/bind/named.conf
     ports:
       - "53:53/udp"
       - "53:53/tcp"
