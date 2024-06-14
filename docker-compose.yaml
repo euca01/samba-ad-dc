@@ -30,6 +30,28 @@ services:
       - "636:636/tcp"
       - "3268:3268/tcp"
       - "3269:3269/tcp"
+    networks: 
+      net-samba-ad-dc:
+        ipv4_address: 172.101.0.10
+        aliases:
+          - samba-ad-dc
+
+  bind9:
+    image: euca01/bind9-alpine:main
+    container_name: bind9
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /opt/bind9-conf/named.conf
+        target: /etc/bind/named.conf
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    networks: 
+      net-samba-ad-dc:
+        ipv4_address: 172.101.0.20
+        aliases:
+          - bind9
 
   chrony:
     image: euca01/chrony:main
@@ -47,17 +69,19 @@ services:
       - NOCLIENTLOG=true
       - ENABLE_NTS=false
       - ENABLE_SYSCLK=true
-
-  bind9:
-    image: euca01/bind9-alpine:main
-    container_name: bind9
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: /opt/bind9-conf/named.conf
-        target: /etc/bind/named.conf
-    ports:
-      - "53:53/udp"
-      - "53:53/tcp"
+    networks: 
+      net-samba-ad-dc:
+        ipv4_address: 172.101.0.30
+        aliases:
+          - chrony
 
 
+networks:
+  net-samba-ad-dc:
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+       - subnet: 172.101.0.0/16
+    driver_opts:
+      com.docker.network.bridge.name: br_srvdl
