@@ -56,7 +56,7 @@ printing = bsd' /etc/samba/smb.conf
 	sed -i '/\[global\]/a # disable NTLMv1 \
 ntlm auth = mschapv2-and-ntlmv2-only' /etc/samba/smb.conf
 
-	sed -i "s/^dns_forwarder = .*/dns_forwarder = ${DNS_HOST_IP}/" /etc/samba/smb.conf
+	sed -i "s/^dns forwarder = .*/dns forwarder = ${DNS_HOST_IP}/" /etc/samba/smb.conf
 
     # Create Kerberos database
     #kstash --random-key
