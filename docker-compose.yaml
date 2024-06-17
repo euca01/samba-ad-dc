@@ -16,8 +16,8 @@ services:
       - /opt/smb-data:/var/lib/samba
       - /opt/krb-data:/var/heimdal
     ports:
-      - "53:53/udp"
-      - "53:53/tcp"
+      - "5353:53/udp"
+      - "5353:53/tcp"
       - "88:88/tcp"
       - "88:88/udp"
       - "135:135/tcp"
@@ -32,22 +32,20 @@ services:
       - "636:636/tcp"
       - "3268:3268/tcp"
       - "3269:3269/tcp"
-#      - "50000-55000:50000-55000/tcp"
-#      - "50000-55000:50000-55000/udp"
 
-#  bind9:
-#    image: euca01/bind9-alpine:main
-#    container_name: bind9
-#    restart: unless-stopped
-#    volumes:
-#      - type: bind
-#        source: /opt/bind9-conf/named.conf
-#        target: /etc/bind/named.conf
-#    ports:
-#      - "53:53/udp"
-#      - "53:53/tcp"
-#    depends_on:
-#      - samba
+  bind9:
+    image: euca01/bind9-alpine:main
+    container_name: bind9
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /opt/bind9-conf/named.conf
+        target: /etc/bind/named.conf
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    depends_on:
+      - samba
 
   chrony:
     image: euca01/chrony:main
