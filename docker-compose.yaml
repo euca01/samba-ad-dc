@@ -31,7 +31,11 @@ services:
       - "636:636/tcp"
       - "3268:3268/tcp"
       - "3269:3269/tcp"
-
+    networks: 
+      net_smb:
+        ipv4_address: 172.101.0.20
+        aliases:
+          - samba
   bind9:
     image: euca01/bind9-alpine:main
     container_name: bind9
@@ -45,6 +49,11 @@ services:
       - "53:53/tcp"
     depends_on:
       - samba
+    networks: 
+      net_smb:
+        ipv4_address: 172.101.0.30
+        aliases:
+          - bind
 
   chrony:
     image: euca01/chrony:main
@@ -62,3 +71,13 @@ services:
       - NOCLIENTLOG=true
       - ENABLE_NTS=false
       - ENABLE_SYSCLK=true
+
+networks:
+  net_smb:
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+       - subnet: 172.101.0.0/16
+    driver_opts:
+      com.docker.network.bridge.name: br_smb
