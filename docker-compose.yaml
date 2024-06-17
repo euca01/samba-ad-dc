@@ -7,7 +7,6 @@ services:
       - path: ./samba.env
         required: true
     restart: unless-stopped
-#    network_mode: "host"
     volumes:
       - /opt/smb-conf:/etc/samba
       - type: bind
