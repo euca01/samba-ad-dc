@@ -1,6 +1,7 @@
 # Samba AD-DC - Active Directory Domain Controller - Docker Compose - Alpine
 
 This repository provides a Docker Compose configuration to deploy a Samba Active Directory Domain Controller (AD DC) out of the box.
+The Administrative Templates (.admx) for Windows 11 2022 Update (22H2) - v3.0 is integrated (7/21/2023)
 
 ## Prerequisites
 
