@@ -58,7 +58,8 @@ ntlm auth = mschapv2-and-ntlmv2-only' /etc/samba/smb.conf
 
 	sed -i "s/^dns forwarder = .*/dns forwarder = ${DNS_HOST_IP}/" /etc/samba/smb.conf
 
-	samba-tool gpo admxload -U Administrator --admx-dir=/opt/PolicyDefinitions/
+	#expect gpoAutoconfig.expect
+	
 
     # Create Kerberos database
     #kstash --random-key
