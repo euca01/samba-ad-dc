@@ -6,6 +6,7 @@ services:
     env_file:
       - path: ./samba.env
         required: true
+    network_mode: "host"
     restart: unless-stopped
     volumes:
       - /opt/smb-conf:/etc/samba
@@ -14,30 +15,24 @@ services:
         target: /etc/krb5.conf
       - /opt/smb-data:/var/lib/samba
       - /opt/krb-data:/var/heimdal
-    ports:
-      - "5353:53/udp"
-      - "5353:53/tcp"
-      - "88:88/tcp"
-      - "88:88/udp"
-      - "135:135/tcp"
-      - "137:137/udp"
-      - "138:138/udp"
-      - "139:139/tcp"
-      - "389:389/tcp"
-      - "389:389/udp"
-      - "445:445/tcp"
-      - "464:464/tcp"
-      - "464:464/udp"
-      - "636:636/tcp"
-      - "3268:3268/tcp"
-      - "3269:3269/tcp"
-    dns:
-      - 172.20.0.30
-    networks: 
-      net_smb:
-        ipv4_address: 172.20.0.20
-        aliases:
-          - samba
+#    ports:
+#      - "5353:53/udp"
+##      - "5353:53/tcp"
+#      - "88:88/tcp"
+#      - "88:88/udp"
+#      - "135:135/tcp"
+#      - "137:137/udp"
+#      - "138:138/udp"
+#      - "139:139/tcp"
+#      - "389:389/tcp"
+#      - "389:389/udp"
+#      - "445:445/tcp"
+#      - "464:464/tcp"
+#      - "464:464/udp"
+#      - "636:636/tcp"
+#      - "3268:3268/tcp"
+#      - "3269:3269/tcp"
+
   bind9:
     image: euca01/bind9-alpine:main
     container_name: bind9
@@ -47,8 +42,8 @@ services:
         source: /opt/bind9-conf/named.conf
         target: /etc/bind/named.conf
     ports:
-      - "53:53/udp"
-      - "53:53/tcp"
+      - "5354:53/udp"
+      - "5354:53/tcp"
     depends_on:
       - proxy-dns
     networks: 
@@ -88,8 +83,8 @@ services:
       - path: ./samba.env
         required: true
     environment:
-      - upstreamServer=172.20.0.20:53
-      - listenAddr=53
+      - upstreamServer=192.168.181.10:5353
+      - listenAddr=:53
     depends_on:
       - samba
     networks: 
