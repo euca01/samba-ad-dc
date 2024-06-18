@@ -31,9 +31,11 @@ services:
       - "636:636/tcp"
       - "3268:3268/tcp"
       - "3269:3269/tcp"
+    dns:
+      - 172.20.0.30
     networks: 
       net_smb:
-        ipv4_address: 172.101.0.20
+        ipv4_address: 172.20.0.20
         aliases:
           - samba
   bind9:
@@ -48,10 +50,10 @@ services:
       - "53:53/udp"
       - "53:53/tcp"
     depends_on:
-      - samba
+      - proxy-dns
     networks: 
       net_smb:
-        ipv4_address: 172.101.0.30
+        ipv4_address: 172.20.0.30
         aliases:
           - bind
 
@@ -71,6 +73,30 @@ services:
       - NOCLIENTLOG=true
       - ENABLE_NTS=false
       - ENABLE_SYSCLK=true
+    networks: 
+      net_smb:
+        ipv4_address: 172.20.0.40
+        aliases:
+          - chrony
+
+
+  proxy-dns:
+    image: euca01/dns-proxy-filter:main
+    container_name: proxy-dns
+    restart: unless-stopped
+    env_file:
+      - path: ./samba.env
+        required: true
+    environment:
+      - upstreamServer=172.20.0.20
+      - listenAddr=53
+    depends_on:
+      - samba
+    networks: 
+      net_smb:
+        ipv4_address: 172.20.0.50
+        aliases:
+          - proxy-dns
 
 networks:
   net_smb:
@@ -78,6 +104,6 @@ networks:
     ipam:
      driver: default
      config:
-       - subnet: 172.101.0.0/16
+       - subnet: 172.20.0.0/16
     driver_opts:
       com.docker.network.bridge.name: br_smb

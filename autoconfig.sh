@@ -75,6 +75,7 @@ SAMBA_HOST_IP=${SAMBA_HOST_IP}
 NTP_SERVERS=${NTP_SERVERS}
 DNS_HOST_IP=${DNS_HOST_IP}
 TZ=${TZ}
+allowedNetwork=${SAMBA_HOST_IP}/24
 EOF
 
 if [ ! -d /opt/krb-conf ] ; then
