@@ -114,6 +114,9 @@ sed -i "s/DOMAIN_TO_REPLACE/${SAMBA_REALM}/g" /opt/bind9-conf/named.conf
 sed -i "s/DNS_IP_TO_REPLACE/${DNS_HOST_IP}/g" /opt/bind9-conf/named.conf
 
 
+iptables -I PREROUTING -t nat -i enp0s31f6 -p tcp --dport 53 ! -s 127.0.0.0/8 -j REDIRECT --to-port 5354
+iptables -I PREROUTING -t nat -i enp0s31f6 -p udp --dport 53 ! -s 127.0.0.0/8 -j REDIRECT --to-port 5354
+
 echo "Mouting and starting container"
 
 # Run docker-compose up
