@@ -85,20 +85,20 @@ services:
     environment:
       - upstreamServer=127.0.0.11:53
       - listenAddr=:53
-   depends_on:
-     - samba
+    depends_on:
+      - samba
     networks: 
       net_smb:
         ipv4_address: 172.20.0.50
-       aliases:
+        aliases:
           - proxy-dns
 
-#networks:
-#  net_smb:
-#    driver: bridge
-#    ipam:
- #    driver: default
-#     config:
-#       - subnet: 172.20.0.0/16
-#    driver_opts:
-#      com.docker.network.bridge.name: br_smb
+networks:
+  net_smb:
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+       - subnet: 172.20.0.0/16
+    driver_opts:
+      com.docker.network.bridge.name: br_smb
