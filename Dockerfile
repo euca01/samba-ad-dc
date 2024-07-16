@@ -1,4 +1,4 @@
-# Samba AD-DC
+# Samba AD-DC 4.20.2-r1
 FROM alpine:3.20
 
 RUN apk --no-cache add \
